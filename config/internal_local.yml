@@ -1,0 +1,10 @@
+debug: true
+local: true
+restapi:
+  probe_host: "0.0.0.0"
+  probe_port: "18000"
+  graphql_host: "localhost"
+  graphql_port: "18080"
+grpc:
+  logger_host: "localhost"
+  logger_port: "18081"

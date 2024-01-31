@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option go_package = "github.com/octoposprime/op-be-shared/pkg/proto/pb/authentication";
+
+service AuthenticationSvc {
+    rpc Login(LoginRequest) returns (Token) {}
+    rpc Refresh(Token) returns (Token) {}
+    rpc Logout(Token) returns (LogoutResponse) {}
+}
+
+message LoginRequest{
+	string username = 1;
+	string email = 2;
+	string password= 3;
+}
+
+message Token{
+	string authenticationToken = 1;
+	string refreshToken = 2;
+}
+
+message LogoutResponse{
+	
+}

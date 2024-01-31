@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+option go_package = "github.com/octoposprime/op-be-shared/pkg/proto/pb/logging";
+import "google/protobuf/timestamp.proto";
+
+service LoggingSvc {
+	rpc GetLogsByFilter(LogDataFilter) returns (LogDatas) {}
+	rpc Log(LogData) returns(LoggingResult)  {}
+}
+
+message LogDatas {
+	repeated LogData logDatas = 1;
+	int64 totalRows = 2;
+}
+  
+message LogData {
+	string id = 1;
+	LogHeader header = 2;
+	LogBody body = 3;
+
+	google.protobuf.Timestamp createdAt = 80;
+	google.protobuf.Timestamp updatedAt = 81;
+}
+
+message LogHeader {
+	google.protobuf.Timestamp eventDate = 1;
+	LogType logType = 2;
+	string serviceName= 3;
+	string path =4;
+	string userId = 5;
+}
+
+message LogBody {
+	string message = 3;
+}
+
+message LoggingResult{
+
+}
+
+message LogDataFilter {
+	optional string id = 1;
+	optional google.protobuf.Timestamp eventDateFrom = 2;
+	optional google.protobuf.Timestamp eventDateTo = 3;
+	optional LogType logType = 4;
+	optional string serviceName = 5;
+	optional string path = 6;
+	optional string userId = 7;
+
+	optional google.protobuf.Timestamp createdAtFrom = 80;
+	optional google.protobuf.Timestamp createdAtTo = 81;
+	optional google.protobuf.Timestamp updatedAtFrom = 82;
+	optional google.protobuf.Timestamp updatedAtTo = 84;
+
+	optional string searchText = 95;
+	optional string sortType = 96;
+	optional LogSortField sortField = 97;
+	optional int32 limit = 98;
+	optional int32 offset = 99;
+}
+
+enum LogType {
+	LogTypeNONE = 0;
+	LogTypeINFO = 1;
+	LogTypeWARNING = 2;
+	LogTypeERROR = 3;
+	LogTypeDEBUG = 4;
+}
+
+enum LogSortField{
+	LogSortFieldNONE = 0;
+	LogSortFieldId = 1;
+	LogSortFieldServiceName = 2;
+	LogSortFieldEventDate = 3;
+	LogSortFieldCreatedAt = 4;
+	LogSortFieldUpdatedAt = 5;
+}
