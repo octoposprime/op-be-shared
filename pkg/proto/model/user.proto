@@ -67,7 +67,7 @@ enum UserStatus{
 
 enum UserType{
 	UserTypeNONE = 0;
-	UserTypeSYSTEM = 1;
+	UserTypeADMIN = 1;
 	UserTypeUSER = 2;
 }
 
