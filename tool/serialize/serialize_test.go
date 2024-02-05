@@ -109,7 +109,7 @@ func TestSerialize_ToJsonPretty(t *testing.T) {
 	}
 }
 
-func TestSerialize_FormJson(t *testing.T) {
+func TestSerialize_SerializeFormJson(t *testing.T) {
 	type testData struct {
 		test string
 	}
@@ -142,10 +142,7 @@ func TestSerialize_FormJson(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			s := Serialize{
-				v: tt.fields.v,
-			}
-			if got := s.FormJson(tt.args.src); !reflect.DeepEqual(got, tt.want) {
+			if got := SerializeFromJson[testData](tt.args.src); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("Serialize.FormJson() = %v, want %v", got, tt.want)
 			}
 		})

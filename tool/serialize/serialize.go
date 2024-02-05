@@ -29,6 +29,8 @@ func (s Serialize) ToJsonPretty() string {
 	return string(b)
 }
 
-func (s Serialize) FormJson(src string) any {
-	return json.Unmarshal([]byte(src), s.v)
+func SerializeFromJson[T any](src string) T {
+	var p T
+	json.Unmarshal([]byte(src), &p)
+	return p
 }

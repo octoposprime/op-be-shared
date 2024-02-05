@@ -29,7 +29,7 @@ func (r *RedisClient) ReadHKey(ctx context.Context, hKey string, field string, d
 	if err != nil {
 		return nil, err
 	}
-	return tserialize.NewSerializer(dataType).FormJson(hVal), nil
+	return tserialize.SerializeFromJson[any](hVal), nil
 }
 
 func (r *RedisClient) DeleteHKey(ctx context.Context, hKey string, field string) error {

@@ -6,7 +6,7 @@ Grpc
 ```
 export PATH="$PATH:$(go env GOPATH)/bin"
 
-go get -u google.golang.org/grpc
+go get  google.golang.org/grpc
 go install google.golang.org/protobuf/cmd/protoc-gen-go
 go get google.golang.org/grpc/cmd/protoc-gen-go-grpc
 go install google.golang.org/grpc/cmd/protoc-gen-go-grpc
