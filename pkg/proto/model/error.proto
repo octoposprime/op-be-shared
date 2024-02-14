@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option go_package = "github.com/octoposprime/op-be-shared/pkg/proto/pb/error";
+
+service ErorrSvc {
+	rpc GetErrors(ErrorRequest) returns (Errors) {}
+}
+
+message ErrorRequest{
+	
+}
+
+message Error {
+	string error =1;
+}
+
+message Errors {
+	repeated Error errors = 1;
+}

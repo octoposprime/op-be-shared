@@ -1,0 +1,104 @@
+syntax = "proto3";
+
+option go_package = "github.com/octoposprime/op-be-shared/pkg/proto/pb/user";
+import "google/protobuf/timestamp.proto";
+
+service UserSvc {
+    rpc GetUsersByFilter(UserFilter) returns (Users) {}
+	rpc CreateUser(User) returns(User)  {}
+	rpc DeleteUser(User) returns (User) {}
+	rpc UpdateUserRole(User) returns (User) {}
+	rpc UpdateUserBase(User) returns (User) {}
+	rpc UpdateUserStatus(User) returns (User) {}
+	rpc ChangePassword(UserPassword) returns (UserPasswordResult) {}
+}
+
+message Users {
+	repeated User users = 1;
+	int64 totalRows = 2;
+}
+  
+message User {
+    string id = 1;
+    string username = 2;
+	string email = 3;
+	string role = 4;
+	UserType userType = 5;
+	UserStatus userStatus = 6;
+	repeated string tags = 7;
+	string firstName = 8;
+	string lastName = 9;
+	google.protobuf.Timestamp createdAt = 80;
+	google.protobuf.Timestamp updatedAt = 81;
+
+	string createdBy = 100;
+	string updatedBy = 101;
+	string deletedBy = 102;
+}
+
+message UserFilter {
+	optional string id = 1;
+	optional string username = 2;
+	optional string email = 3;
+	optional string role = 4;
+	optional UserType userType = 5;
+	optional UserStatus userStatus = 6;
+	repeated string tags = 7;
+	optional string firstName = 8;
+	optional string lastName = 9;
+
+	optional google.protobuf.Timestamp createdAtFrom = 80;
+	optional google.protobuf.Timestamp createdAtTo = 81;
+	optional google.protobuf.Timestamp updatedAtFrom = 82;
+	optional google.protobuf.Timestamp updatedAtTo = 84;
+
+	optional string searchText = 95;
+	optional string sortType = 96;
+	optional UserSortField sortField = 97;
+	optional int32 limit = 98;
+	optional int32 offset = 99;
+}
+
+enum UserStatus{
+	UserStatusNONE = 0;
+	UserStatusACTIVE = 1;
+	UserStatusINACTIVE = 2;
+}
+
+enum UserType{
+	UserTypeNONE = 0;
+	UserTypeADMIN = 1;
+	UserTypeUSER = 2;
+}
+
+enum UserSortField{
+	UserSortFieldNONE = 0;
+	UserSortFieldId = 1;
+	UserSortFieldName = 2;
+	UserSortFieldCreatedAt = 3;
+	UserSortFieldUpdatedAt = 4;
+}
+
+message UserPasswords {
+	repeated UserPassword userPasswords = 1;
+}
+
+message UserPassword {
+	string id = 1;
+	string userId = 2;
+	string password = 3;
+	PasswordStatus passwordStatus = 4;
+}
+
+message UserPasswordResult{
+
+}
+
+enum PasswordStatus{
+	PasswordStatusNONE = 0;
+	PasswordStatusACTIVE = 1;
+	PasswordStatusINACTIVE = 2;
+	PasswordStatusAUTO_GENERATED = 3;
+	PasswordStatusCHANGE_REQUIRED = 4;
+	PasswordStatusEXPIRED = 5;
+}

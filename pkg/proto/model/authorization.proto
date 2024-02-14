@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option go_package = "github.com/octoposprime/op-be-shared/pkg/proto/pb/authorization";
+
+service AuthorizationSvc {
+	rpc GetRoles(RoleFilter) returns (Roles) {}
+}
+
+message Roles {
+	repeated Role roles = 1;
+	int64 totalRows = 2;
+}
+
+message Role {
+	string name = 1;
+	PermissionGroups permissionGroups = 2;
+}
+
+message RoleFilter {
+	optional string name = 1;
+}
+
+message PermissionGroups {
+	repeated PermissionGroup permissionGroups = 1;
+}
+
+message PermissionGroup {
+	string groupName = 1;
+	Permissions permissions = 2;
+}
+
+message Permissions {
+	repeated Permission permissions = 1;
+}
+
+message Permission {
+	string policy = 1;
+}
