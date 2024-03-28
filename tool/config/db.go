@@ -67,4 +67,5 @@ func (c *DbConfig) ReadConfig() {
 	}
 	c.PostgresDb.UserName = os.Getenv("POSTGRES_USERNAME")
 	c.PostgresDb.Password = os.Getenv("POSTGRES_PASSWORD")
+	c.PostgresDb.Database = os.Getenv("POSTGRES_DATABASE")
 }
