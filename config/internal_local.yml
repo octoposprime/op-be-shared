@@ -8,3 +8,9 @@ restapi:
 grpc:
   logger_host: "localhost"
   logger_port: "18081"
+  user_host: "localhost"
+  user_port: "18082"
+  dlr_host: "localhost"
+  dlr_port: "18083"
+  authentication_host: "localhost"
+  authentication_port: "18084"
