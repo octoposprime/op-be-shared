@@ -11,7 +11,13 @@ service UserSvc {
 	rpc UpdateUserBase(User) returns (User) {}
 	rpc UpdateUserStatus(User) returns (User) {}
 	rpc ChangePassword(UserPassword) returns (UserPasswordResult) {}
+    rpc CheckUserPassword(UserWithPassword) returns (User) {}
 }
+
+message UserWithPassword {
+    User user = 1;
+    UserPassword userPassword = 2;
+} 
 
 message Users {
 	repeated User users = 1;
