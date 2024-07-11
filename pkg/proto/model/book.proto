@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+option go_package = "github.com/octoposprime/op-be-shared/pkg/proto/pb/book";
+import "google/protobuf/timestamp.proto";
+
+service BookSvc {
+    rpc GetPagesByFilter(PageFilter) returns (Pages) {}
+    rpc CreatePage(Page) returns(Page)  {}
+    rpc DeletePage(Page) returns (Page) {}
+    rpc UpdatePageBase(Page) returns (Page) {}
+    rpc UpdatePageCore(Page) returns (Page) {}
+    rpc UpdatePageStatus(Page) returns (Page) {}
+}
+
+message Pages {
+    repeated Page pages = 1;
+    int64 totalRows = 2;
+}
+
+message Page {
+    string id = 1;
+    string pageData = 2;
+    PageType pageType = 3;
+    PageStatus pageStatus = 4;
+    repeated string tags = 5;
+    google.protobuf.Timestamp createdAt = 80;
+    google.protobuf.Timestamp updatedAt = 81;
+
+    string createdBy = 100;
+    string updatedBy = 101;
+    string deletedBy = 102;
+}
+
+message PageFilter {
+    optional string id = 1;
+    optional PageType pageType = 2;
+    optional PageStatus pageStatus = 3;
+    repeated string tags = 4;
+
+    optional google.protobuf.Timestamp createdAtFrom = 80;
+    optional google.protobuf.Timestamp createdAtTo = 81;
+    optional google.protobuf.Timestamp updatedAtFrom = 82;
+    optional google.protobuf.Timestamp updatedAtTo = 84;
+
+    optional string searchText = 95;
+    optional string sortType = 96;
+    optional PageSortField sortField = 97;
+    optional int32 limit = 98;
+    optional int32 offset = 99;
+}
+
+enum PageStatus{
+    PageStatusNONE = 0;
+    PageStatusACTIVE = 1;
+    PageStatusINACTIVE = 2;
+}
+
+enum PageType{
+    PageTypeNONE = 0;
+}
+
+enum PageSortField{
+    PageSortFieldNONE = 0;
+    PageSortFieldId = 1;
+    PageSortFieldCreatedAt = 2;
+    PageSortFieldUpdatedAt = 3;
+}
