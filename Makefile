@@ -32,7 +32,7 @@ proto-generate: ## Protobuf Generate
 		pkg/proto/model/authentication.proto \
 		pkg/proto/model/authorization.proto \
 		pkg/proto/model/user.proto \
-		pkg/proto/model/dlr.proto \
+		pkg/proto/model/book.proto \
 		--experimental_allow_proto3_optional
 
 ## Help:
