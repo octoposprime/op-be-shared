@@ -11,6 +11,7 @@ service UserSvc {
 	rpc UpdateUserBase(User) returns (User) {}
 	rpc UpdateUserStatus(User) returns (User) {}
 	rpc ChangePassword(UserPassword) returns (UserPasswordResult) {}
+        rpc CheckUserPassword(User) returns (User) {} 
 }
 
 message Users {
