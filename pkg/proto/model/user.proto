@@ -4,14 +4,14 @@ option go_package = "github.com/octoposprime/op-be-shared/pkg/proto/pb/user";
 import "google/protobuf/timestamp.proto";
 
 service UserSvc {
-    rpc GetUsersByFilter(UserFilter) returns (Users) {}
+  rpc GetUsersByFilter(UserFilter) returns (Users) {}
 	rpc CreateUser(User) returns(User)  {}
 	rpc DeleteUser(User) returns (User) {}
 	rpc UpdateUserRole(User) returns (User) {}
 	rpc UpdateUserBase(User) returns (User) {}
 	rpc UpdateUserStatus(User) returns (User) {}
 	rpc ChangePassword(UserPassword) returns (UserPasswordResult) {}
-        rpc CheckUserPassword(UserWithPassword) returns (User) {}
+  rpc CheckUserPassword(UserWithPassword) returns (User) {}
 }
 
 message UserWithPassword {
@@ -25,8 +25,8 @@ message Users {
 }
   
 message User {
-    string id = 1;
-    string username = 2;
+  string id = 1;
+  string username = 2;
 	string email = 3;
 	string role = 4;
 	UserType userType = 5;
