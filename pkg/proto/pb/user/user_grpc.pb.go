@@ -25,7 +25,7 @@ type UserSvcClient interface {
 	UpdateUserBase(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
 	UpdateUserStatus(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
 	ChangePassword(ctx context.Context, in *UserPassword, opts ...grpc.CallOption) (*UserPasswordResult, error)
-	CheckUserPassword(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
+	CheckUserPassword(ctx context.Context, in *UserWithPassword, opts ...grpc.CallOption) (*User, error)
 }
 
 type userSvcClient struct {
@@ -99,7 +99,7 @@ func (c *userSvcClient) ChangePassword(ctx context.Context, in *UserPassword, op
 	return out, nil
 }
 
-func (c *userSvcClient) CheckUserPassword(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error) {
+func (c *userSvcClient) CheckUserPassword(ctx context.Context, in *UserWithPassword, opts ...grpc.CallOption) (*User, error) {
 	out := new(User)
 	err := c.cc.Invoke(ctx, "/UserSvc/CheckUserPassword", in, out, opts...)
 	if err != nil {
@@ -119,7 +119,7 @@ type UserSvcServer interface {
 	UpdateUserBase(context.Context, *User) (*User, error)
 	UpdateUserStatus(context.Context, *User) (*User, error)
 	ChangePassword(context.Context, *UserPassword) (*UserPasswordResult, error)
-	CheckUserPassword(context.Context, *User) (*User, error)
+	CheckUserPassword(context.Context, *UserWithPassword) (*User, error)
 	mustEmbedUnimplementedUserSvcServer()
 }
 
@@ -148,7 +148,7 @@ func (UnimplementedUserSvcServer) UpdateUserStatus(context.Context, *User) (*Use
 func (UnimplementedUserSvcServer) ChangePassword(context.Context, *UserPassword) (*UserPasswordResult, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ChangePassword not implemented")
 }
-func (UnimplementedUserSvcServer) CheckUserPassword(context.Context, *User) (*User, error) {
+func (UnimplementedUserSvcServer) CheckUserPassword(context.Context, *UserWithPassword) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckUserPassword not implemented")
 }
 func (UnimplementedUserSvcServer) mustEmbedUnimplementedUserSvcServer() {}
@@ -291,7 +291,7 @@ func _UserSvc_ChangePassword_Handler(srv interface{}, ctx context.Context, dec f
 }
 
 func _UserSvc_CheckUserPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(User)
+	in := new(UserWithPassword)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -303,7 +303,7 @@ func _UserSvc_CheckUserPassword_Handler(srv interface{}, ctx context.Context, de
 		FullMethod: "/UserSvc/CheckUserPassword",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(UserSvcServer).CheckUserPassword(ctx, req.(*User))
+		return srv.(UserSvcServer).CheckUserPassword(ctx, req.(*UserWithPassword))
 	}
 	return interceptor(ctx, in, info, handler)
 }
