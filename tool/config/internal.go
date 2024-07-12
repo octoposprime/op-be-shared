@@ -20,8 +20,8 @@ type InternalConfig struct {
 		LoggerPort         string `yaml:"logger_port"`
 		UserHost           string `yaml:"user_host"`
 		UserPort           string `yaml:"user_port"`
-		DlrHost           string `yaml:"dlr_host"`
-		DlrPort           string `yaml:"dlr_port"`
+		BookHost           string `yaml:"book_host"`
+		BookPort           string `yaml:"book_port"`
 		AuthenticationHost string `yaml:"authentication_host"`
 		AuthenticationPort string `yaml:"authentication_port"`
 		AuthorizationHost  string `yaml:"authorization_host"`
